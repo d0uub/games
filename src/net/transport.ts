@@ -23,8 +23,8 @@ let cb: ((m: NetMsg, from: string) => void) | null = null;
 export function initNet(name: string, onMessage: (m: NetMsg, from: string) => void) {
   if (room) { cb = onMessage; return; }
   cb = onMessage;
-  room = joinRoom(APP, ROOM, {
-    onError: (e) => console.warn("[trystero] error", e),
+  room = joinRoom({ appId: APP }, ROOM, {
+    onJoinError: (e) => console.warn("[trystero] error", e.error),
   });
   action = room.makeAction<NetMsg>(NS);
   action.onMessage = (data, ctx) => {

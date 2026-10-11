@@ -18,10 +18,18 @@ declare module "trystero" {
     onPeerJoin: ((peerId: string) => void) | null;
     onPeerLeave: ((peerId: string) => void) | null;
   }
-  export interface JoinRoomCallbacks { onError?: (err: unknown) => void; }
+  export interface JoinRoomConfig {
+    appId: string;
+    maxReceiveBytes?: number;
+    password?: string;
+    passive?: boolean;
+  }
+  export interface JoinRoomCallbacks {
+    onJoinError?: (err: { error: string; appId: string; roomId: string; peerId: string }) => void;
+  }
   export const selfId: string;
   export const joinRoom: (
-    appId: string, roomId: string, callbacks?: JoinRoomCallbacks
+    config: JoinRoomConfig, roomId: string, callbacks?: JoinRoomCallbacks
   ) => Room;
 }
 
