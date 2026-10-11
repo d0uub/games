@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import type { CSSProperties, MutableRefObject } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import Joystick, { type Stick } from "../../components/Joystick";
@@ -350,7 +351,7 @@ export default function Match({ roster, onExit }: Props) {
 
 // ---- 3D scene ----
 function Scene({ worldRef, myId }: {
-  worldRef: React.MutableRefObject<WorldState>; myId: string;
+  worldRef: MutableRefObject<WorldState>; myId: string;
 }) {
   return (
     <group>
@@ -396,7 +397,7 @@ function Ground() {
 }
 
 // GenBar: a thin bar above each generator showing progress, updated each frame.
-function GenBar({ worldRef, index }: { worldRef: React.MutableRefObject<WorldState>; index: number }) {
+function GenBar({ worldRef, index }: { worldRef: MutableRefObject<WorldState>; index: number }) {
   const ref = useRef<any>(null);
   useFrame(() => {
     if (!ref.current) return;
@@ -412,7 +413,7 @@ function GenBar({ worldRef, index }: { worldRef: React.MutableRefObject<WorldSta
   );
 }
 
-function DoorMat({ worldRef, index }: { worldRef: React.MutableRefObject<WorldState>; index: number }) {
+function DoorMat({ worldRef, index }: { worldRef: MutableRefObject<WorldState>; index: number }) {
   const ref = useRef<any>(null);
   useFrame(() => {
     if (!ref.current) return;
@@ -423,7 +424,7 @@ function DoorMat({ worldRef, index }: { worldRef: React.MutableRefObject<WorldSt
 }
 
 function Players({ worldRef, myId }: {
-  worldRef: React.MutableRefObject<WorldState>; myId: string;
+  worldRef: MutableRefObject<WorldState>; myId: string;
 }) {
   const w = worldRef.current;
   return (
@@ -436,7 +437,7 @@ function Players({ worldRef, myId }: {
 }
 
 function PlayerMesh({ id, worldRef, isMe, role }: {
-  id: string; worldRef: React.MutableRefObject<WorldState>; isMe: boolean; role: "survivor" | "killer";
+  id: string; worldRef: MutableRefObject<WorldState>; isMe: boolean; role: "survivor" | "killer";
 }) {
   const ref = useRef<any>(null);
   const mat = useRef<any>(null);
@@ -522,32 +523,32 @@ function Controls({ myRole, stickRef, onHit, onHook, onUnhook, onRevive, onMendD
   );
 }
 
-const exitStyle: React.CSSProperties = {
+const exitStyle: CSSProperties = {
   background: "#334155", color: "#e2e8f0", border: "none", borderRadius: 8,
   padding: "8px 14px", fontWeight: 700, cursor: "pointer",
 };
-const hudStyle: React.CSSProperties = {
+const hudStyle: CSSProperties = {
   position: "absolute", top: 8, left: 8, zIndex: 15, display: "flex", flexDirection: "column", gap: 6,
   pointerEvents: "none", maxWidth: "70%",
 };
-const hudRow: React.CSSProperties = { display: "flex", flexWrap: "wrap", gap: 6 };
-const hudChip: React.CSSProperties = {
+const hudRow: CSSProperties = { display: "flex", flexWrap: "wrap", gap: 6 };
+const hudChip: CSSProperties = {
   background: "#0f172acc", color: "#e2e8f0", padding: "6px 10px", borderRadius: 8,
   fontSize: 12, fontWeight: 700, border: "1px solid #334155",
 };
-const ctlWrap: React.CSSProperties = {
+const ctlWrap: CSSProperties = {
   position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 18,
   display: "flex", justifyContent: "space-between", alignItems: "flex-end",
   padding: 16, pointerEvents: "none",
 };
-const btnCol: React.CSSProperties = {
+const btnCol: CSSProperties = {
   display: "flex", flexDirection: "column", gap: 12, pointerEvents: "auto",
 };
-const overlay: React.CSSProperties = {
+const overlay: CSSProperties = {
   position: "absolute", inset: 0, zIndex: 30, background: "rgba(2,6,23,0.8)",
   display: "flex", alignItems: "center", justifyContent: "center",
 };
-const overlayCard: React.CSSProperties = {
+const overlayCard: CSSProperties = {
   background: "#0f172a", border: "1px solid #334155", borderRadius: 16,
   padding: 28, textAlign: "center", display: "flex", flexDirection: "column", gap: 14,
 };

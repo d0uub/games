@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import type { CSSProperties } from "react";
 import {
   initNet, broadcast, getMyId, peerList, type NetMsg,
 } from "../../net/transport";
@@ -223,7 +224,7 @@ export default function Lobby({ name, onStart, onExit }: Props) {
   );
 }
 
-const styles: Record<string, React.CSSProperties> = {
+const styles: Record<string, CSSProperties> = {
   wrap: {
     position: "fixed", inset: 0, background: "radial-gradient(circle at 50% 30%, #1e293b, #020617)",
     display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
